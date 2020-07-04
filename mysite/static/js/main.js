@@ -223,3 +223,8 @@ $(window).on('load', function() {
 
 
 })(jQuery);
+
+$(document).on('input', '#preview-text', function() {
+	var text = $(this).val()
+	$('#preview-content').html(text)
+});

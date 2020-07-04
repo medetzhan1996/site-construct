@@ -1,7 +1,8 @@
 from django.views.generic import TemplateView
+from django.views.generic.detail import DetailView
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
-from .models import Сategory
+from .models import Сategory, Product
 # List views
 
 
@@ -16,5 +17,28 @@ class IndexView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         author = self.kwargs['author']
+        category = self.kwargs.get('category', None)
         context['categories'] = Сategory.objects.filter(author=author).all()
+        if not category:
+            context['products'] = Product.objects.filter(
+                is_top=True, author=author)[:12]
+        else:
+            context['category'] = get_object_or_404(Сategory, id=category)
+            context['products'] = Product.objects.filter(
+                category__id=category, author=author)[:12]
+        return context
+
+
+# Детальный просмотр продукта
+class ProductDetailView(DetailView):
+    model = Product
+    context_object_name = 'product'
+
+    def get_template_names(self):
+        if self.object.kind == 'text_input':
+            return 'product_text_detail.html'
+
+    def get_context_data(self, **kwargs):
+        print(self.object.id)
+        context = super().get_context_data(**kwargs)
         return context
