@@ -47,7 +47,7 @@ class Material(ItemBase):
 
 
 # Связь материала с продуктом М-М
-class ProductMaterial(ItemBase):
+class ProductMaterial(models.Model):
     material = models.ForeignKey(Material,
                                  related_name='rel_material',
                                  on_delete=models.CASCADE)
@@ -75,9 +75,9 @@ class Product(ItemBase):
         ('text_input', 'Набор текста')
     ]
     file = models.FileField(upload_to='images', blank=True)
-    category = models.ForeignKey(AuthorСategory,
-                                 related_name='products_auth_category',
-                                 on_delete=models.CASCADE)
+    author_category = models.ForeignKey(AuthorСategory,
+                                        related_name='products_auth_category',
+                                        on_delete=models.CASCADE)
     description = models.TextField(blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=0)
     price_old = models.DecimalField(max_digits=10, decimal_places=0,
@@ -89,10 +89,10 @@ class Product(ItemBase):
         default='normal'
     )
     classes = models.CharField(max_length=180, blank=True)
-    materials = models.ManyToManyField('self',
-                                       through=ProductMaterial,
-                                       related_name='rel_materials',
-                                       symmetrical=False)
+    materials = models.ManyToManyField(Material,
+                                       through='ProductMaterial',
+                                       related_name='rel_materials')
+    is_select_material = models.BooleanField(default=False)
 
     class Meta:
         db_table = "products"
