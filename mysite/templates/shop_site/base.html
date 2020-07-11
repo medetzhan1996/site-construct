@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     {% load static %}
+    {% load pwa %}
     <title></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,6 +12,7 @@
     <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/animate.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
 
     <!-- js файлы -->
@@ -24,6 +26,7 @@
     <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
     <script src="https://unpkg.com/konva@5.0.3/konva.min.js"></script>
     <script src="https://cdn.rawgit.com/hammerjs/touchemulator/master/touch-emulator.js"></script>
+    {% progressive_web_app_meta %}
   </head>
   <body>
     <!-- Page Preloder -->

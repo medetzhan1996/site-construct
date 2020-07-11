@@ -100,7 +100,7 @@
 							</div>
 							<div id="collapse1" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
 								<div class="panel-body">
-									<p class="p-text">{{product.description}}</p>
+									<p class="p-text">{{product.description|safe}}</p>
 								</div>
 							</div>
 						</div>
@@ -110,11 +110,7 @@
 							</div>
 							<div id="collapse2" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
 								<div class="panel-body">
-									<p>Цвет <output class="pull-right">Розовое Золото</output> </p>
-									<p>Материал <output class="pull-right">Серебряный</output> </p>
-									<p>Вес <output class="pull-right">2,36 Г</output> </p>
-									<p>Рост <output class="pull-right">8-10мм</output> </p>
-									<p>Толщина <output class="pull-right">1мм</output> </p>
+									{{product.details|safe}}
 								</div>
 							</div>
 						</div>
@@ -124,9 +120,7 @@
 							</div>
 							<div id="collapse3" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
 								<div class="panel-body">
-									<p>Вы можете выбрать способ доставки при оформлении заказа</p>
-									<p>Доставка в среднем : <span>3 - 4 дня</span></p>
-									<p>Сертификат качества на 3 года.  За это время мы вам, совершенно БЕСПЛАТНО: почистим, отремантируем</p>
+									{{product.shipping_return|safe}}
 								</div>
 							</div>
 						</div>

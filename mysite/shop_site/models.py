@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from tinymce.models import HTMLField
 
 
 # Базовый абстрактный класс
@@ -71,14 +72,22 @@ class Product(ItemBase):
     )
     KIND_CHOICES = [
         ('normal', 'Обычный'),
-        ('image_select', 'Выбор изображения'),
-        ('text_input', 'Набор текста')
+        ('text_input', 'Набор текста'),
+        ('image_select', 'Выбор изображения')
     ]
-    file = models.FileField(upload_to='images', blank=True)
+    file = models.FileField(upload_to='images')
+    file_extra1 = models.FileField(
+        upload_to='images', blank=True, null=True)
+    file_extra2 = models.FileField(
+        upload_to='images', blank=True, null=True)
+    file_extra3 = models.FileField(
+        upload_to='images', blank=True, null=True)
     author_category = models.ForeignKey(AuthorСategory,
                                         related_name='products_auth_category',
                                         on_delete=models.CASCADE)
-    description = models.TextField(blank=True)
+    description = HTMLField(blank=True, null=True)
+    details = HTMLField(blank=True, null=True)
+    shipping_return = HTMLField(blank=True, null=True)
     price = models.DecimalField(max_digits=10, decimal_places=0)
     price_old = models.DecimalField(max_digits=10, decimal_places=0,
                                     blank=True, null=True)
@@ -91,8 +100,8 @@ class Product(ItemBase):
     classes = models.CharField(max_length=180, blank=True)
     materials = models.ManyToManyField(Material,
                                        through='ProductMaterial',
-                                       related_name='rel_materials')
-    is_select_material = models.BooleanField(default=False)
+                                       related_name='rel_materials',
+                                       blank=True, null=True)
 
     class Meta:
         db_table = "products"

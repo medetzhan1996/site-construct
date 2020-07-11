@@ -19,7 +19,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 LOGIN_URL = "/manager/login/"
-LOGOUT_REDIRECT_URL = '/manager/logout/'
+LOGOUT_REDIRECT_URL = '/logout/'
 # Перенаправлять после успешного входа
 LOGIN_REDIRECT_URL = '/manager/'
 # Quick-start development settings - unsuitable for production
@@ -32,19 +32,24 @@ SECRET_KEY = 'qh-k$ocrk4#y0=0cr@#^0lrz=ibc6_^a%ayb__5kcy%x*ywcj0'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+SENDSMS_BACKEND = 'myapp.mysmsbackend.SmsBackend'
 
 # Application definition
 
 INSTALLED_APPS = [
+    'shop_site',
+    'manager',
+    'dal',
+    'pwa',
+    'tinymce',
+    'widget_tweaks',
+    'dal_select2',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'shop_site',
-    'manager'
 ]
 
 MIDDLEWARE = [
@@ -74,9 +79,14 @@ TEMPLATES = [
         },
     },
 ]
+TINYMCE_DEFAULT_CONFIG = {
 
+    'height': 280
+}
 WSGI_APPLICATION = 'mysite.wsgi.application'
-
+PWA_APP_NAME = 'euro-standart'
+PWA_APP_DESCRIPTION = "euro-standart description"
+PWA_APP_DEBUG_MODE = False
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases

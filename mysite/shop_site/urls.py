@@ -5,6 +5,8 @@ urlpatterns = [
     path('<int:author>', views.IndexView.as_view(), name='index'),
     path('<int:author>/<int:category>', views.IndexView.as_view(),
          name='index'),
-    path('card/<int:author>/<pk>', views.ProductDetailView.as_view(),
-         name='product_detail')
+    path('product/<int:author>/<pk>', views.ProductDetailView.as_view(),
+         name='product_detail'),
+    path('category-autocomplete/', views.CategotyAutocomplete.as_view(),
+         name='category-autocomplete'),
 ]

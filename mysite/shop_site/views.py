@@ -1,6 +1,7 @@
 from django.views.generic import TemplateView
 from django.views.generic.detail import DetailView
 from django.shortcuts import get_object_or_404
+from dal import autocomplete
 from django.contrib.auth.models import User
 from .models import Сategory, AuthorСategory, Product, ProductMaterial
 # List views
@@ -44,3 +45,11 @@ class ProductDetailView(DetailView):
         context['product_materials'] = ProductMaterial.objects.filter(
             product__id=self.object.id).all()
         return context
+
+
+class CategotyAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        qs = Сategory.objects.all()
+        if self.q:
+            qs = qs.filter(title__icontains=self.q)
+        return qs
